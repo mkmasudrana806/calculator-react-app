@@ -3,6 +3,7 @@
   background-color: var(--bg-color-1);
   padding: 10px;
   overflow-y: scroll;
+  white-space: nowrap;
 }
 
 .header p {
@@ -19,6 +20,7 @@
 .calculation_expression {
   overflow-x: scroll;
   width: 100%;
+  min-height: 30px;
 }
 
 .calculation_expression p {
@@ -29,4 +31,9 @@
 .calculation_result p {
   font-weight: bold;
   font-size: 1.3rem;
+  min-height: 30px;
+}
+
+.calculation_result {
+  min-height: 30px;
 }

@@ -14,6 +14,7 @@
   cursor: pointer;
   transition: 0.2s;
   color: var(--text-color-2);
+  user-select: none;
 }
 
 .keypad_keys p:active {

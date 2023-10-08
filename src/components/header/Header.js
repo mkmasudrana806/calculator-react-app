@@ -1,31 +1,30 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./header.css";
 
-const Header = () => {
+const Header = ({ expression, result, history }) => {
+  const resultRef = useRef();
+  const expressionRef = useRef();
+
+  // scroll a element into view when component is mounted
+  useEffect(() => {
+    resultRef.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  // scroll right when component is mounted
+  useEffect(() => {
+    expressionRef.current.scrollLeft = expressionRef.current.scrollWidth;
+  }, [expression]);
+
   return (
     <div className="header custom-scroll">
       <div className="calculation_history">
-        <p>10+2</p>
-        <p>12+2*5</p>
-        <p>10*50</p>
-        <p>10+2</p>
-        <p>12+2*5</p>
-        <p>10*50</p>
-        <p>10+2</p>
-        <p>12+2*5</p>
-        <p>10*50</p>
-        <p>10+2</p>
-        <p>12+2*5</p>
-        <p>10*50</p>
-        <p>10+2</p>
-        <p>12+2*5</p>
-        <p>10*50</p>
+        {history && history?.map((item, i) => <p key={i}>{item}</p>)}
       </div>
-      <div className="calculation_expression custom-scroll">
-        <p>53227+5</p>
+      <div ref={expressionRef} className="calculation_expression custom-scroll">
+        <p>{expression}</p>
       </div>
       <div className="calculation_result">
-        <p>10</p>
+        <p ref={resultRef}>{result}</p>
       </div>
     </div>
   );

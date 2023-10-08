@@ -1,7 +1,7 @@
 import React from "react";
 import "./keypad.css";
 
-const Keypad = () => {
+const Keypad = ({ handleKeypress }) => {
   const keys = [
     {
       keyCode: 55,
@@ -83,13 +83,17 @@ const Keypad = () => {
   return (
     <div className="keypad">
       <div className="keypad_keys">
-        {keys.map((key, i) => (
-          <p key={i}>{key.label}</p>
+        {keys.map((item, i) => (
+          <p onClick={() => handleKeypress(item.keyCode, item.label)} key={i}>
+            {item.label}
+          </p>
         ))}
       </div>
       <div className="keypad_symbols">
         {symbols.map((item, i) => (
-          <p key={i}>{item.label}</p>
+          <p onClick={() => handleKeypress(item.keyCode, item.value)} key={i}>
+            {item.label}
+          </p>
         ))}
       </div>
     </div>

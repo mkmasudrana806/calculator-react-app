@@ -8,7 +8,7 @@ const Header = ({ expression, result, history }) => {
   // scroll a element into view when component is mounted
   useEffect(() => {
     resultRef.current.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  }, [history]);
 
   // scroll right when component is mounted
   useEffect(() => {

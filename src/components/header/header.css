@@ -16,7 +16,9 @@
 
 .calculation_history {
   white-space: nowrap;
+  overflow: hidden;
 }
+
 .calculation_expression {
   overflow-x: scroll;
   width: 100%;

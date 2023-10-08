@@ -42,9 +42,13 @@ function App() {
       setExpression(expression + key);
     } else if (keycode === 8) {
       // keycode 8 for backspace
-      if (!expression) return;
+      if (!expression) {
+        setResult("");
+        return;
+      }
       setExpression(expression.slice(0, -1));
     } else if (keycode === 13) {
+      // 13 for enter key
       if (!expression) return;
       setResult(calculateResult(expression));
     }

@@ -19,6 +19,9 @@
   overflow: hidden;
 }
 
+.calculation_history p:hover {
+  cursor: pointer;
+}
 .calculation_expression {
   overflow-x: scroll;
   width: 100%;

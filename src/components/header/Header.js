@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "./header.css";
 
-const Header = ({ expression, result, history }) => {
+const Header = ({ expression, result, history, setExpression }) => {
   const resultRef = useRef();
   const expressionRef = useRef();
 
@@ -18,7 +18,12 @@ const Header = ({ expression, result, history }) => {
   return (
     <div className="header custom-scroll">
       <div className="calculation_history">
-        {history && history?.map((item, i) => <p key={i}>{item}</p>)}
+        {history &&
+          history?.map((item, i) => (
+            <p onClick={(e) => setExpression(item)} key={i}>
+              {item}
+            </p>
+          ))}
       </div>
       <div ref={expressionRef} className="calculation_expression custom-scroll">
         <p>{expression}</p>

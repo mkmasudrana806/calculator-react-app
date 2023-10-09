@@ -23,42 +23,42 @@ function App() {
   // handle keypress and keyclicked
   const handleKeypress = (keycode, key) => {
     if (!keycode) return;
-    if (!usedKeyCodes.includes(keycode)) return;
+    if (!usedKeyCodes.includes(keycode)) return; // return when key is not usedKeyCodes
 
     if (numbers.includes(key)) {
-      if (key === "0" && expression.length === 0) return;
+      if (key === "0" && expression.length === 0) return; // return when first number is zero
       setExpression(expression + key);
     } else if (operators.includes(key)) {
       if (expression.length === 0) return;
       // if already last character is similar to current character then return
       const lastChar = expression.slice(-1);
       if (operators.includes(lastChar)) return;
-      if (lastChar === ".") return;
+      if (lastChar === ".") return; // when last char is ., operator is not allowed, return
       setExpression(expression + key);
     } else if (key === ".") {
       if (!expression) return;
       const lastChar = expression.slice(-1);
-      if (!numbers.includes(lastChar)) return;
+      if (!numbers.includes(lastChar)) return; // when last char is not a number then return
       setExpression(expression + key);
     } else if (keycode === 8) {
       // keycode 8 for backspace
       if (!expression) {
-        setResult("");
+        setResult(""); // return empty result when expression is empty
         return;
       }
       setExpression(expression.slice(0, -1));
     } else if (keycode === 13) {
       // 13 for enter key
-      if (!expression) return;
+      if (!expression) return; // if no expression then return
+      const lastChar = expression.slice(-1);
+      if (!numbers.includes(lastChar)) return; //if last char operator then return
       setResult(calculateResult(expression));
     }
 
     // calculation result
     function calculateResult(exp) {
       if (!exp) return;
-      const lastChar = exp.slice(-1);
-      if (!numbers.includes(lastChar)) exp = exp.slice(0, -1);
-      setHistory((prev) => [...prev, exp]);
+      setHistory((prev) => [...prev, exp]); // push into history array
       const answer = eval(exp).toFixed(2);
       return answer;
     }
@@ -68,6 +68,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("calculator-mode", JSON.stringify(isDarkMode));
   }, [isDarkMode]);
+
   return (
     <div
       className="app_body"
@@ -95,7 +96,12 @@ function App() {
         </div>
 
         {/* calculator header ( display ) */}
-        <Header expression={expression} result={result} history={history} />
+        <Header
+          expression={expression}
+          result={result}
+          setExpression={setExpression}
+          history={history}
+        />
         <Keypad handleKeypress={handleKeypress} />
       </div>
     </div>
